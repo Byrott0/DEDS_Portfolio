@@ -1,13 +1,18 @@
 import csv
+import os
 import sys
 
 sys.setrecursionlimit(20000000)
 
-from LinkedList import LinkedListEmpty
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
+from LinkedList import LinkedList
+from LinkedListPopulated import LinkedListPopulated
+from LinkedListEmpty import LinkedListEmpty
 
 kentekens = LinkedListEmpty()
 
 with open(sys.argv[1]) as f:
     reader = csv.reader(f, delimiter=',')
     for row in reader:
-        kentekens = kentekens.addFirst(row[0])
+        kentekens = kentekens.sortSimple(row[0])

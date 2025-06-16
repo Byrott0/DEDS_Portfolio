@@ -1,45 +1,5 @@
-from abc import ABC, abstractmethod
+from LinkedList import LinkedList
 
-class LinkedList(ABC):
-
-    @abstractmethod
-    def __str__(self): pass
-
-    @abstractmethod
-    def addFirst(self, value): pass
-
-    @abstractmethod
-    def remove(self, value): pass
-
-    @abstractmethod
-    def smallest(self): pass
-
-    @abstractmethod
-    def largest(self): pass
-
-    @abstractmethod
-    def sortSimple(self): pass
-
-class LinkedListEmpty(LinkedList):
-     def __str__(self):
-         return ""
-     
-     def addFirst(self, value):
-         return LinkedListPopulated([value])
-     
-     def remove(self, value):
-         return self  # Lege lijst blijft leeg, dus return zelf
-     
-     def smallest(self):
-         raise ValueError("geen elementen in de lijst")
-     
-     def largest(self):
-         raise ValueError("geen elementen in de lijst")
-     
-     def sortSimple(self):
-         return self  # Lege lijst blijft leeg, dus return zelf
-    
-  
 class LinkedListPopulated(LinkedList):
     def __init__(self, head):
         self.head = head
@@ -107,3 +67,4 @@ def sortSimple(lst):
 
 print("sortSimple methode test")
 print(sortSimple([5, 4, 3, 2, 7]))  # Verwacht : [7, 5, 4, 3, 2]
+
