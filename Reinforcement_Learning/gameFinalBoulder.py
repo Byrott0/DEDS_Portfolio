@@ -21,7 +21,7 @@ class Maze:
 
 # methode generate muren en hazards
     def _generate_walls(self):
-        wall_count = int(self.size[0] * self.size[1] * 0.15)
+        wall_count = int(self.size[0] * self.size[1] * 0.15) # 15% van de cellen als muren
         positions = [(x, y) for x in range(self.size[0]) for y in range(self.size[1]) 
                     if (x, y) != self.start and (x, y) != self.goal]
         wall_positions = random.sample(positions, min(wall_count, len(positions)))
@@ -29,7 +29,7 @@ class Maze:
             self.grid[x, y] = 1
 
     def _generate_hazards(self):
-        hazard_count = int(self.size[0] * self.size[1] * 0.08)
+        hazard_count = int(self.size[0] * self.size[1] * 0.08) # 8% van de cellen als hazards
         positions = [(x, y) for x in range(self.size[0]) for y in range(self.size[1]) 
                     if self.grid[x, y] == 0 and (x, y) != self.start and (x, y) != self.goal]
         if positions:
@@ -79,7 +79,7 @@ class QlearningLogic: # implementatie van logica voor Q-learning
                 if env.grid[x, y] != 1:  # Don't initialize Q-values for walls
                     self.q_table[(x, y)] = {action: 0.0 for action in env.actions}
 
-    def choose_action(self, state):
+    def choose_action(self, state): # greedy policy
         if random.random() < self.epsilon:
             return random.choice(self.env.actions)
         else:
@@ -353,11 +353,7 @@ if __name__ == "__main__":
     maze = Maze(size=(15, 15), start=(0, 0), goal=(14, 14))
     agent = QlearningLogic(maze, alpha=0.1, gamma=0.95, epsilon=0.15)
 
-    
-    # Do some initial training
-    print("Pre-training agent for 500 episodes...")
     agent.train(episodes=500)
-    print("Pre-training completed! Starting visualization...")
 
     print("Launching Pygame visualization...")
     game = MazeGame(maze, agent)
