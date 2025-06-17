@@ -18,4 +18,7 @@ class LinkedListEmpty(LinkedList):
      
      def sortSimple(self):
          return self  # Lege lijst blijft leeg, dus return zelf
+     
+     def uniq(self):
+         return 0
     

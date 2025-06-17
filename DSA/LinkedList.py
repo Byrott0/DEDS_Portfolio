@@ -21,3 +21,6 @@ class LinkedList(ABC):
 
     @abstractmethod
     def sortSimple(self): pass
+
+    @abstractmethod
+    def uniq(self): pass
